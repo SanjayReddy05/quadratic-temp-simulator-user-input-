@@ -1,31 +1,27 @@
 import numpy as np
+print("Enter three known times (like 6 8 12):")
+x1 = float(input("Time 1: "))
+x2 = float(input("Time 2: "))
+x3 = float(input("Time 3: "))
 
-# Hardcoded time-temperature values
-x = [6, 8, 12]
-y = [20, 22, 32]
+
+print("\nEnter the temperatures at those times:")
+y1 = float(input(f"Temperature at {x1}: "))
+y2 = float(input(f"Temperature at {x2}: "))
+y3 = float(input(f"Temperature at {x3}: "))
 
 
 A = [
-    [x[0]**2, x[0], 1],
-    [x[1]**2, x[1], 1],
-    [x[2]**2, x[2], 1]
+    [x1**2, x1, 1],
+    [x2**2, x2, 1],
+    [x3**2, x3, 1]
 ]
-
+y = [y1, y2, y3]
 
 a, b, c = np.linalg.solve(A, y)
 
 
-def temperature_at(hour):
-    return a * hour**2 + b * hour + c
-
-
-try:
-    hour = float(input("Enter the hour of the day (0–24): "))
-    if 0 <= hour <= 24:
-        temp = temperature_at(hour)
-        print(f"Predicted temperature at {hour:02.1f}:00 is {temp:.2f}°C")
-    else:
-        print("Please enter a number between 0 and 24.")
-except ValueError:
-    print(" Invalid input. Please enter a valid number (e.g., 7, 14.5).")
-
+print("\nNow enter a time to predict the temperature at:")
+hour = float(input("Time: "))
+temperature = a * hour**2 + b * hour + c
+print(f"\nPredicted temperature at {hour}:00 is {temperature:.2f}°C")
